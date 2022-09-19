@@ -32,12 +32,12 @@ WORKDIR $GOPATH/src/github.com/liswang89/policy-openshift-plus
 
 COPY download-clis.sh .
 COPY go.mod .
-#COPY go.sum .
+COPY go.sum .
 COPY Makefile .
 COPY tests ./tests
 COPY run_tests.sh .
-#COPY /kube/config ./tests/kubeconfig_hub
-#COPY /kube/config ./tests/kubeconfig_managed
+COPY /kube/config ./tests/kubeconfig_hub
+COPY /kube/config ./tests/kubeconfig_managed
 
 RUN ./download-clis.sh
 
