@@ -26,18 +26,18 @@ COPY --from=builder /go /go
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 WORKDIR $GOPATH
-RUN mkdir -p $GOPATH/src/gitlab.cee.redhat.com/mpqe/mps/solutions/openshift_plus/openshift_plus/tests
+RUN mkdir -p $GOPATH/src/github.com/liswang89/policy-openshift-plus/tests
 
 WORKDIR $GOPATH/src/github.com/liswang89/policy-openshift-plus
 
 COPY download-clis.sh .
 COPY go.mod .
-COPY go.sum .
+#COPY go.sum .
 COPY Makefile .
 COPY tests ./tests
 COPY run_tests.sh .
-COPY /kube/config ./tests/kubeconfig_hub
-COPY /kube/config ./tests/kubeconfig_managed
+#COPY ~/.kube/config ./tests/kubeconfig_hub
+#COPY ~/.kube/config ./tests/kubeconfig_managed
 
 RUN ./download-clis.sh
 
@@ -50,4 +50,6 @@ RUN chmod -R go+wx $GOPATH/src/github.com/liswang89/policy-openshift-plus
 
 WORKDIR $GOPATH/src/github.com/liswang89/policy-openshift-plus
 
-CMD ["./run_tests.sh"]
+RUN chmod +x run_tests.sh
+
+#CMD ["./run_tests.sh"]
